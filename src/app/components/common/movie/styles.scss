@@ -1,0 +1,9 @@
+.movie {
+  width: 240px;
+  cursor: pointer;
+
+  .movie-image {
+    object-fit: contain;
+    height: 240px;
+  }
+}

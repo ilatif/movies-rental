@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
 
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatCardModule, MatGridListModule, MatToolbarModule, MatListModule } from '@angular/material';
 
 const modules = [
   MatTableModule,
-]
+  MatCardModule,
+  MatGridListModule,
+  MatToolbarModule,
+  MatListModule,
+];
 
 @NgModule({
   imports: modules,
