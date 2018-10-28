@@ -19,7 +19,7 @@
       <ng-container *ngFor="let column of displayedColumns;">
         <mat-list-item *ngIf="irrelevantColumns.indexOf(column) === -1 && column[0] !== '_'">
           <h4 class="strong" mat-line>{{capitalize(column)}}</h4>
-          <p mat-line>{{item[column]}}</p>
+          <p class="movie-description" mat-line>{{item[column]}}</p>
         </mat-list-item>
       </ng-container>
     </mat-list>
