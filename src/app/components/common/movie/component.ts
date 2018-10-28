@@ -44,7 +44,6 @@ export class MovieComponent {
     }
 
     movie.img = `/assets/images/movie-covers/${movie.img}`;
-    movie.genres = movie.genres.map(genre => CapitalizeHelper(genre));
 
     return movie;
   }

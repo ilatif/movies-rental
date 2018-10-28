@@ -17,10 +17,18 @@
       <h3 mat-subheader>Details</h3>
       <img style="padding: 0 16px;" image-loading [originalSrc]="item.img" [src]="imageLoadingPlaceholder" />
       <ng-container *ngFor="let column of displayedColumns;">
-        <mat-list-item *ngIf="irrelevantColumns.indexOf(column) === -1 && column[0] !== '_'">
+        <mat-list-item *ngIf="column === 'genres'; else displayOtherColumns">
           <h4 class="strong" mat-line>{{capitalize(column)}}</h4>
-          <p class="movie-description" mat-line>{{item[column]}}</p>
+          <p class="movie-description" mat-line>
+            <a class="movie-genre" [routerLink]="['/movies', 'list']" [queryParams]="{genre: genre}" *ngFor="let genre of item[column]; let last = last">{{capitalize(genre)}} <ng-container *ngIf="!last">| </ng-container></a>
+          </p>
         </mat-list-item>
+        <ng-template #displayOtherColumns>
+          <mat-list-item *ngIf="irrelevantColumns.indexOf(column) === -1 && column[0] !== '_'">
+            <h4 class="strong" mat-line>{{capitalize(column)}}</h4>
+            <p class="movie-description" mat-line>{{item[column]}}</p>
+          </mat-list-item>
+        </ng-template>
       </ng-container>
     </mat-list>
   </ng-container>
