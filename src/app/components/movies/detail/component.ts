@@ -15,6 +15,7 @@ export class MovieDetailComponent {
 
   movie: Movie;
   movieKey: string = '';
+  isLoading: boolean = false;
 
   constructor(private cd: ChangeDetectorRef,
     private activatedRoute: ActivatedRoute,
@@ -28,9 +29,12 @@ export class MovieDetailComponent {
   }
 
   fetchMovie(movieKey) {
+    this.isLoading = true;
+
     this.moviesService
       .getMovie(movieKey)
       .subscribe((movie: Movie)=> {
+        this.isLoading = false;
         this.movie = movie;
         this.cd.detectChanges();
       })

@@ -12,6 +12,7 @@ import { Movie } from 'app/interfaces/movie';
 })
 export class MoviesListComponent {
   movies: Array<Movie>;
+  isLoading: boolean = false;
 
   constructor(private cd: ChangeDetectorRef,
     private moviesService: MoviesService) {
@@ -19,9 +20,12 @@ export class MoviesListComponent {
   }
 
   ngOnInit() {
+    this.isLoading = true;
+
     this.moviesService
       .getList()
       .subscribe((movies: Array<Movie>) => {
+        this.isLoading = false;
         this.movies = movies;
         this.cd.detectChanges();
       })

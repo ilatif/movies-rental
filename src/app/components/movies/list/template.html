@@ -1,5 +1,12 @@
-<mat-grid-list cols="4">
-  <mat-grid-tile *ngFor="let movie of movies;">
-    <movie [type]="'card'" [item]="movie"></movie>
-  </mat-grid-tile>
-</mat-grid-list>
+<ng-container *ngIf="isLoading; else displayMoviesList">
+  <div class="loader">
+    <mat-spinner mode="indeterminate"></mat-spinner>
+  </div>
+</ng-container>
+<ng-template #displayMoviesList>
+  <mat-grid-list cols="4">
+    <mat-grid-tile *ngFor="let movie of movies;">
+      <movie [type]="'card'" [item]="movie"></movie>
+    </mat-grid-tile>
+  </mat-grid-list>
+</ng-template>

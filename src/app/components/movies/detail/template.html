@@ -1,1 +1,8 @@
-<movie [type]="'detail'" [item]="movie" *ngIf="movie"></movie>
+<ng-container *ngIf="isLoading; else displayMovie">
+  <div class="loader">
+    <mat-spinner [mode]="'indeterminate'"></mat-spinner>
+  </div>
+</ng-container>
+<ng-template #displayMovie>
+  <movie [type]="'detail'" [item]="movie" *ngIf="movie"></movie>
+</ng-template>
