@@ -11,7 +11,7 @@ import { Movie } from 'app/interfaces/movie';
   styleUrls: ['./styles.scss'],
 })
 export class MoviesListComponent {
-  movies: Array<Movie>;
+  movies: Array<Movie> = [];
   isLoading: boolean = false;
 
   constructor(private cd: ChangeDetectorRef,
@@ -27,6 +27,9 @@ export class MoviesListComponent {
       .subscribe((movies: Array<Movie>) => {
         this.isLoading = false;
         this.movies = movies;
+        this.cd.detectChanges();
+      }, (err) => {
+        this.isLoading = false;
         this.cd.detectChanges();
       })
     ;

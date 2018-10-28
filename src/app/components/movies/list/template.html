@@ -4,9 +4,16 @@
   </div>
 </ng-container>
 <ng-template #displayMoviesList>
-  <mat-grid-list cols="4">
-    <mat-grid-tile *ngFor="let movie of movies;">
-      <movie [type]="'card'" [item]="movie"></movie>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <ng-container *ngIf="!isLoading && !movies.length; else displayMovies">
+    <div class="empty-list-message">
+      <h3>There are no items in the list.</h3>
+    </div>
+  </ng-container>
+  <ng-template #displayMovies>
+    <mat-grid-list cols="4">
+      <mat-grid-tile *ngFor="let movie of movies;">
+        <movie [type]="'card'" [item]="movie"></movie>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </ng-template>
 </ng-template>
