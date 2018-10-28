@@ -10,3 +10,8 @@ export interface Movie {
 
   _shortDescription: string,
 }
+
+export interface MoviesSearch {
+  text?: string;
+  genre?: string;
+}

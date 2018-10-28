@@ -7,6 +7,24 @@ let movies = [];
 
 app.use(cors());
 
+app.get('/api/movies/search', (req, res) => {
+  const searchedMovies = [],
+    movies = getMovies(),
+    searchText = req.query.text,
+    searchGenre = req.query.genre;
+
+  movies.forEach(movie => {
+    if (searchText && (movie.name.toLowerCase().indexOf(searchText.toLowerCase()) !== -1 || movie.description.toLowerCase().indexOf(searchText.toLowerCase()) !== -1)) {
+      searchedMovies.push(movie);
+    } else if (searchGenre && movie.genres.indexOf(searchGenre) !== -1) {
+      searchedMovies.push(movie);
+    }
+  });
+
+  res.type('application/json');
+  res.send(searchedMovies);
+});
+
 app.get('/api/movies', (req, res) => {
   const movies = getMovies();
   res.type('application/json');

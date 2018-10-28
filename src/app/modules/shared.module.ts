@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -10,6 +11,7 @@ import { ImageLoadingDirective } from 'app/directives/image-loading';
 
 @NgModule({
   imports: [
+    FormsModule,
     CommonModule,
     RouterModule,
     MaterialModule,
@@ -19,6 +21,7 @@ import { ImageLoadingDirective } from 'app/directives/image-loading';
     ImageLoadingDirective,
   ],
   exports: [
+    FormsModule,
     CommonModule,
     MaterialModule,
     MovieComponent,
