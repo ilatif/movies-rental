@@ -29,13 +29,9 @@ export class MovieDetailComponent {
 
   fetchMovie(movieKey) {
     this.moviesService
-      .getList()
-      .subscribe((movies: Array<Movie>)=> {
-        movies.forEach((movie: Movie) => {
-          if (movie.key === this.movieKey) {
-            this.movie = movie;
-          }
-        });
+      .getMovie(movieKey)
+      .subscribe((movie: Movie)=> {
+        this.movie = movie;
         this.cd.detectChanges();
       })
     ;
