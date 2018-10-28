@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { MoviesService } from 'app/services/backend/movies-service';
 
@@ -18,6 +18,7 @@ export class MovieDetailComponent {
   isLoading: boolean = false;
 
   constructor(private cd: ChangeDetectorRef,
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private moviesService: MoviesService) {
 
@@ -37,6 +38,8 @@ export class MovieDetailComponent {
         this.isLoading = false;
         this.movie = movie;
         this.cd.detectChanges();
+      }, (err) => {
+        this.router.navigate(['/404'], { skipLocationChange: true });
       })
     ;
   }

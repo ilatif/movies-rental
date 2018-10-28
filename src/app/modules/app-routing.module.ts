@@ -10,6 +10,10 @@ const routes: Routes = [
     redirectTo: 'movies/list',
   },
   {
+    path: '404',
+    component: PageNotFoundComponent,
+  },
+  {
     path: '**',
     component: PageNotFoundComponent,
   }
