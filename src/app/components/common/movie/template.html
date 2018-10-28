@@ -4,7 +4,7 @@
       <mat-card-title>{{item.name}}</mat-card-title>
       <mat-card-subtitle>{{item.length}}</mat-card-subtitle>
     </mat-card-header>
-    <img class="movie-image" mat-card-image [src]="'/assets/images/movie-covers/' + item.img">
+    <img class="movie-image" mat-card-image image-loading [originalSrc]="item.img" [src]="imageLoadingPlaceholder">
     <mat-card-content>
       <p>{{item._shortDescription}}</p>
     </mat-card-content>
@@ -15,7 +15,7 @@
     <a style="padding: 0 16px;" [routerLink]="['/movies', 'list']">Back</a>
     <mat-list>
       <h3 mat-subheader>Details</h3>
-      <img style="padding: 0 16px;" [src]="'/assets/images/movie-covers/' + item.img" />
+      <img style="padding: 0 16px;" image-loading [originalSrc]="item.img" [src]="imageLoadingPlaceholder" />
       <ng-container *ngFor="let column of displayedColumns;">
         <mat-list-item *ngIf="irrelevantColumns.indexOf(column) === -1 && column[0] !== '_'">
           <h4 class="strong" mat-line>{{capitalize(column)}}</h4>

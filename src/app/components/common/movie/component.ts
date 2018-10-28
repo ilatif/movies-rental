@@ -18,6 +18,7 @@ export class MovieComponent {
   movieDescriptionTrimIndex: number = 50;
   displayedColumns: Array<string>;
   irrelevantColumns: Array<string> = ['id', 'key', 'img'];
+  imageLoadingPlaceholder: string = '/assets/images/image-loading.png';
 
   constructor(private cd: ChangeDetectorRef) {
 
@@ -25,7 +26,6 @@ export class MovieComponent {
 
   ngOnChanges(changes) {
     if (changes.item) {
-      console.log(this.item);
       this.item = this._formatItem(this.item);
       if (this.type === 'detail') {
         this.displayedColumns = Object.keys(this.item);
@@ -43,6 +43,7 @@ export class MovieComponent {
       movie._shortDescription = `${movie._shortDescription.slice(0, this.movieDescriptionTrimIndex)}...`;
     }
 
+    movie.img = `/assets/images/movie-covers/${movie.img}`;
     movie.genres = movie.genres.map(genre => CapitalizeHelper(genre));
 
     return movie;
