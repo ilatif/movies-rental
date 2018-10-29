@@ -12,10 +12,9 @@
 </ng-container>
 <ng-template #displayDetail>
   <ng-container *ngIf="type === 'detail'">
-    <a style="padding: 0 16px;" [routerLink]="['/movies', 'list']">Back</a>
     <mat-list>
       <h3 mat-subheader>Details</h3>
-      <img style="padding: 0 16px;" image-loading [originalSrc]="item.img" [src]="imageLoadingPlaceholder" />
+      <img class="movie-detail-image" image-loading [originalSrc]="item.img" [src]="imageLoadingPlaceholder" />
       <ng-container *ngFor="let column of displayedColumns;">
         <mat-list-item *ngIf="column === 'genres'; else displayOtherColumns">
           <h4 class="strong" mat-line>{{capitalize(column)}}</h4>

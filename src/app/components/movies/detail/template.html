@@ -4,5 +4,6 @@
   </div>
 </ng-container>
 <ng-template #displayMovie>
+  <a class="back-link" (click)="back($event)">Back</a>
   <movie [type]="'detail'" [item]="movie" *ngIf="movie"></movie>
 </ng-template>

@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 import { MoviesService } from 'app/services/backend/movies-service';
 
@@ -23,6 +24,7 @@ export class MovieDetailComponent {
   constructor(private cd: ChangeDetectorRef,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private location: Location,
     private moviesService: MoviesService) {
 
   }
@@ -50,6 +52,15 @@ export class MovieDetailComponent {
         this.router.navigate(['/404'], { skipLocationChange: true });
       })
     ;
+  }
+  
+  back(event) {
+    const state = window.history.state;
+    if (state && state['navigationId'] === 1) {
+      this.router.navigate(['/movies', 'list']);
+    } else {
+      this.location.back();
+    }
   }
 
   _cancelMovieRequest() {
