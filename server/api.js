@@ -69,7 +69,7 @@ app.get('/api/genres', (req, res) => {
 
 function getMovies() {
   if (!movies.length) {
-    movies = JSON.parse(fs.readFileSync('../src/assets/json/movies-list.json', 'utf8'));
+    movies = JSON.parse(fs.readFileSync(`${__dirname}/../src/assets/json/movies-list.json`, 'utf8'));
   }
   return movies;
 }
