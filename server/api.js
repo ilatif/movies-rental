@@ -51,6 +51,22 @@ app.get('/api/movies/:movieKey', (req, res) => {
   }
 });
 
+app.get('/api/genres', (req, res) => {
+  let genres = [],
+    movies = getMovies();
+
+  movies.forEach(movie => {
+    movie.genres.forEach(genre => {
+      if (genres.indexOf(genre) === -1) {
+        genres.push(genre);
+      }
+    });
+  });
+
+  res.type('application/json');
+  res.send(genres);
+});
+
 function getMovies() {
   if (!movies.length) {
     movies = JSON.parse(fs.readFileSync('../src/assets/json/movies-list.json', 'utf8'));

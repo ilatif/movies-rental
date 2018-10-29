@@ -4,19 +4,6 @@
   </div>
 </ng-container>
 <ng-template #displayMoviesList>
-  <div class="search-controls">
-    <mat-form-field>
-      <input matInput type="text" placeholder="Type to search" [(ngModel)]="searchText" />
-    </mat-form-field>
-    &nbsp;
-    <mat-form-field>
-      <mat-select placeholder="Choose Genre" [(ngModel)]="searchGenre">
-        <mat-option [value]="genre" *ngFor="let genre of genres;">{{capitalize(genre)}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    &nbsp; &nbsp;
-    <button mat-raised-button color="primary" (click)="search($event)">Search</button>
-  </div>
   <ng-container *ngIf="!isLoading && !movies.length; else displayMovies">
     <div class="empty-list-message">
       <h3>There are no items in the list.</h3>
