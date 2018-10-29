@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MoviesService } from 'app/services/backend/movies-service';
 
 import { Movie } from 'app/interfaces/movie';
+import { Subscription } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -14,8 +15,9 @@ import { Movie } from 'app/interfaces/movie';
 export class MoviesListComponent {
   movies: Array<Movie> = [];
   isLoading: boolean = false;
-
   genres: Array<string> = [];
+
+  moviesRequest: Subscription;
 
   constructor(private cd: ChangeDetectorRef,
     private router: Router,
@@ -41,10 +43,15 @@ export class MoviesListComponent {
     ;
   }
 
+  ngOnDestroy() {
+    this._cancelMoviesRequest();
+  }
+
   fetchMoviesList() {
+    this._cancelMoviesRequest();
     this.isLoading = true;
 
-    this.moviesService
+    this.moviesRequest = this.moviesService
       .getList()
       .subscribe((movies: Array<Movie>) => {
         this.isLoading = false;
@@ -58,9 +65,10 @@ export class MoviesListComponent {
   }
 
   searchMovies(params) {
+    this._cancelMoviesRequest();
     this.isLoading = true;
 
-    this.moviesService
+    this.moviesRequest = this.moviesService
       .searchMovies(params)
       .subscribe((movies: Array<Movie>) => {
         this.isLoading = false;
@@ -71,5 +79,11 @@ export class MoviesListComponent {
         this.cd.detectChanges();
       })
     ;
+  }
+
+  _cancelMoviesRequest() {
+    if (this.moviesRequest) {
+      this.moviesRequest.unsubscribe();
+    }
   }
 }

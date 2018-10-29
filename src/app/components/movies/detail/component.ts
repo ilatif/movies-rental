@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MoviesService } from 'app/services/backend/movies-service';
 
 import { Movie } from 'app/interfaces/movie';
+import { Subscription } from 'rxjs';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +18,8 @@ export class MovieDetailComponent {
   movieKey: string = '';
   isLoading: boolean = false;
 
+  movieRequest: Subscription;
+
   constructor(private cd: ChangeDetectorRef,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -29,10 +32,15 @@ export class MovieDetailComponent {
     this.fetchMovie(this.movieKey);
   }
 
+  ngOnDestroy() {
+    this._cancelMovieRequest();
+  }
+
   fetchMovie(movieKey) {
+    this._cancelMovieRequest();
     this.isLoading = true;
 
-    this.moviesService
+    this.movieRequest = this.moviesService
       .getMovie(movieKey)
       .subscribe((movie: Movie)=> {
         this.isLoading = false;
@@ -42,5 +50,11 @@ export class MovieDetailComponent {
         this.router.navigate(['/404'], { skipLocationChange: true });
       })
     ;
+  }
+
+  _cancelMovieRequest() {
+    if (this.movieRequest) {
+      this.movieRequest.unsubscribe();
+    }
   }
 }
